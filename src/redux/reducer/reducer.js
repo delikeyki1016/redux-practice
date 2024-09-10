@@ -4,24 +4,23 @@ let initialState = {
     password: "",
 };
 
+// 리듀서함수는 state,action 두개의 매개변수를 가진다.
 function reducer(state = initialState, action) {
-    console.log("action?", action);
-    //if 또는 switch문으로 명세서를 만듦
-    // if (action.type === "INCREMENT") {
-    //     return { ...state, count: state.count + action.payload.num };
+    // console.log("리듀서콘솔", state, action);
+    // if (action.type === "INCREASE") {
+    //     return { ...state, count: state.count + 1 };
+    // } else if (action.type === "DECREASE") {
+    //     return { ...state, count: state.count - 1 };
     // }
-    // return { ...state }; // if에 속하지 않을 경우의 리턴을 부여
-    switch (action.type) {
-        case "INCREMENT":
-            return { ...state, count: state.count + action.payload.num };
-        case "DECREMENT":
-            return { ...state, count: state.count - action.payload.num };
+    // return { ...state };
+    const { type, payload } = action;
+    switch (type) {
+        case "INCREASE":
+            return { ...state, count: state.count + payload.num };
+        case "DECREASE":
+            return { ...state, count: state.count - payload.num };
         case "LOGIN":
-            return {
-                ...state,
-                id: action.payload.id,
-                password: action.payload.password,
-            };
+            return { ...state, id: payload.id, password: payload.password };
         default:
             return { ...state };
     }
